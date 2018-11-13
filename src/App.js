@@ -27,6 +27,17 @@ class App extends Component {
     };
   }
 
+  onAddTask(task) {
+    let newTask = {
+      id: this.state.todoList.length,
+      task: task,
+      completed: false
+    }
+    this.setState(state => ({
+      todoList: [newTask, ...state.todoList]
+    }));
+  }
+
   onTodoToggleClick(id) {
     let todoList = this.state.todoList.map(task => {
       if (task.id === id) {
@@ -42,7 +53,7 @@ class App extends Component {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-4">
-            <AddTodo />
+            <AddTodo addTask={this.onAddTask.bind(this)} />
             <TodoList
               todos={this.state.todoList}
               onClick={this.onTodoToggleClick.bind(this)}
