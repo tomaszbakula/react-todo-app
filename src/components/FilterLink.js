@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setListFilter } from '../actions';
 
-const FilterLink = ({ children, onClick, active }) => (
+const FilterLink = ({ children, onClick, active, color = 'primary' }) => (
   <button
-    className={'btn btn-sm btn-outline-primary ' + (active ? 'active' : '')}
+    className={'btn btn-sm btn-outline-' + color + ' ' + (active ? 'active' : '')}
     onClick={onClick}
   >{children}</button>
 );

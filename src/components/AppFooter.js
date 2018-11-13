@@ -8,9 +8,9 @@ const TodoList = ({ filter, onFilterChange }) => (
 
     <FilterLink filter="ALL">All</FilterLink>
     {' '}
-    <FilterLink filter="ACTIVE">Active</FilterLink>
+    <FilterLink filter="ACTIVE" color="success">Active</FilterLink>
     {' '}
-    <FilterLink filter="COMPLETED">Completed</FilterLink>
+    <FilterLink filter="COMPLETED" color="danger">Completed</FilterLink>
 
   </div>
 );
