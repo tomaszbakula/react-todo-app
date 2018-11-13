@@ -27,13 +27,26 @@ class App extends Component {
     };
   }
 
+  onTodoToggleClick(id) {
+    let todoList = this.state.todoList.map(task => {
+      if (task.id === id) {
+        task.completed = !task.completed
+      }
+      return task;
+    });
+    this.setState({ todoList: todoList });
+  }
+
   render() {
     return (
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-4">
             <AddTodo />
-            <TodoList todos={this.state.todoList} />
+            <TodoList
+              todos={this.state.todoList}
+              onClick={this.onTodoToggleClick.bind(this)}
+            />
           </div>
         </div>
       </div>
