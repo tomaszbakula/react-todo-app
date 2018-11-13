@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addTodo } from '../actions';
 
 class AddTodo extends Component {
   constructor(props) {
@@ -12,7 +14,7 @@ class AddTodo extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.addTask(this.state.task);
+    this.props.addTodo(this.state.task);
     this.setState({ task: '' });
   }
 
@@ -20,14 +22,18 @@ class AddTodo extends Component {
     return (
       <form onSubmit={this.onSubmit.bind(this)}>
         <input
-            className="my-4 form-control form-control-lg"
-            placeholder="What needs to be done?"
-            value={this.state.task}
-            onChange={this.onTaskChange.bind(this)}
+          className="my-4 form-control form-control-lg"
+          placeholder="What needs to be done?"
+          value={this.state.task}
+          onChange={this.onTaskChange.bind(this)}
         />
       </form>
     );
   }
 }
 
-export default AddTodo;
+const mapDispatchToProps = dispatch => ({
+  addTodo: task => dispatch(addTodo(task))
+});
+
+export default connect(null, mapDispatchToProps)(AddTodo);
