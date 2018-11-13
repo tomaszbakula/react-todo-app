@@ -1,7 +1,7 @@
 import React from 'react';
 import FilterLink from './FilterLink';
 
-const TodoList = ({ filter, onFilterChange }) => (
+const TodoList = () => (
   <div className="mt-2">
 
     <strong>Show: </strong>
