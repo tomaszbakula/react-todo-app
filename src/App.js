@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
+import AppFooter from './components/AppFooter';
 
 class App extends Component {
   constructor(props) {
@@ -23,8 +24,11 @@ class App extends Component {
         id: 3,
         task: 'Workout',
         completed: false
-      }]
+      }],
+      filter: 'ALL'
     };
+
+    this.filteredTodos = this.filteredTodos.bind(this);
   }
 
   onAddTask(task) {
@@ -48,6 +52,25 @@ class App extends Component {
     this.setState({ todoList: todoList });
   }
 
+  onFilterChange(filter) {
+    this.setState({ filter });
+  }
+
+  filteredTodos() {
+    const todos = this.state.todoList;
+
+    switch (this.state.filter) {
+      case 'ALL':
+        return todos;
+      case 'ACTIVE':
+        return todos.filter(t => !t.completed)
+      case 'COMPLETED':
+        return todos.filter(t => t.completed)
+      default:
+        throw new Error('Unexpected filter' + this.state.filter);
+    }
+  }
+
   render() {
     return (
       <div className="container">
@@ -55,8 +78,12 @@ class App extends Component {
           <div className="col-4">
             <AddTodo addTask={this.onAddTask.bind(this)} />
             <TodoList
-              todos={this.state.todoList}
+              todos={this.filteredTodos()}
               onClick={this.onTodoToggleClick.bind(this)}
+            />
+            <AppFooter
+              filter={this.state.filter}
+              onFilterChange={this.onFilterChange.bind(this)}
             />
           </div>
         </div>
